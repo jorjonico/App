@@ -1,21 +1,33 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, TextInput, View } from 'react-native';
 
 import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Hola jorjonico!</Text>
-      <StatusBar style="auto" />
+      <View style={styles.itemContainer}>
+        <TextInput placeholder='Agregar item a la lista' style={styles.inputItem}/>
+        <Button title='Agregar' color= 'cornflowerblue'/>
+      </View>
+      <View></View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {  
-    flex: 1,
-    backgroundColor: '#fff',
+  container:{
+    padding: 30, 
+    marginTop: 50,
+  },
+  itemContainer:{
+    flexDirection: 'row', 
+    justifyContent: 'center', 
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  inputItem:{
+    borderBottomColor: 'black', 
+    borderBottomWidth: 1, 
+    width: 200, 
+    marginRight: 20
   },
 });
