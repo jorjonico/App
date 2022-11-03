@@ -1,11 +1,13 @@
-import { Button, FlatList, Modal, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, FlatList, Modal, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 
 export default function App() {
-  const [textItem, setTextItem] = useState('')
-  const [itemList, setItemList] = useState([])
+  const [textItem, setTextItem] = useState('');
+  const [itemList, setItemList] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [itemSelected, setItemSelected] = useState({});
 
   const onHandleChangeItem = (t) => {
     setTextItem(t);
@@ -20,9 +22,20 @@ export default function App() {
   };
   
   const renderItem = ({item}) => (
-    <View style={styles.itemstyle}>
+    <TouchableOpacity onPress={() => selectedItem(item.id)} style={styles.itemstyle}>
     <Text>{item.value}</Text>
-    </View> );
+    </TouchableOpacity> );
+
+  const selectedItem = (id) =>{
+        setItemSelected (itemList.filter(item => item.id === id)[0]);
+        setModalVisible(true);
+    };
+  
+  const deleteItem = () =>{
+    setItemList( currentState => currentState.filter(item => item.id !== itemSelected.id))
+    setItemSelected({})
+    setModalVisible(false)
+  }
 
 
   return (
@@ -39,6 +52,26 @@ export default function App() {
         keyExtractor={(item) => item.id}
         />
       </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Quieres eliminar este elemento?</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => deleteItem()}>
+              <Text style={styles.textStyle}>ELIMINAR</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -69,12 +102,46 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     paddingTop: 10,
   },
-});
 
-{/*       <View>
-        {itemList.map((item) => (
-          <View style={styles.itemstyle}>
-            <Text>{item.value}</Text>
-          </View>
-        ))}
-      </View> */}
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "red",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
+});
