@@ -64,11 +64,16 @@ export default function App() {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Quieres eliminar este elemento?</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => deleteItem()}>
-              <Text style={styles.textStyle}>ELIMINAR</Text>
-            </Pressable>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={styles.textStyle}>NO</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.button, styles.buttonDelete]}
+                onPress={() => deleteItem()}>
+                <Text style={styles.textStyle}>SI, ELIMINAR</Text>
+              </Pressable>
           </View>
         </View>
       </Modal>
@@ -109,6 +114,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 22
   },
+
   modalView: {
     margin: 20,
     backgroundColor: "white",
@@ -133,15 +139,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#F194FF",
   },
   buttonClose: {
+    backgroundColor: "black",
+    marginBottom: 15,
+  },
+  buttonDelete: {
     backgroundColor: "red",
   },
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    fontSize: 15,
+    padding: 3,
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center"
-  }
+  },
 });
