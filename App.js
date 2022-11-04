@@ -88,9 +88,10 @@ const styles = StyleSheet.create({
     marginBottom: 150,
   },
   titulo:{
-    fontSize: 20,
+    fontSize: 32,
     marginLeft: 15,
     paddingBottom: 20,
+    color: "royalblue",
   },
   itemContainer:{
     flexDirection: 'row', 
