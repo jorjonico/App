@@ -140,11 +140,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#F194FF",
   },
   buttonClose: {
-    backgroundColor: "black",
+    backgroundColor: "royalblue",
     marginBottom: 15,
   },
   buttonDelete: {
-    backgroundColor: "red",
+    backgroundColor: "lightslategrey",
   },
   textStyle: {
     color: "white",
