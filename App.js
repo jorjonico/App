@@ -23,7 +23,7 @@ export default function App() {
   
   const renderItem = ({item}) => (
     <TouchableOpacity onPress={() => selectedItem(item.id)} style={styles.itemstyle}>
-    <Text>{item.value}</Text>
+    <Text>✔ {item.value}</Text>
     </TouchableOpacity> );
 
   const selectedItem = (id) =>{
