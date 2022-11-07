@@ -1,5 +1,6 @@
-import { Button, FlatList, Modal, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Button, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
+import Modal from './componets/Modal';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 
@@ -52,31 +53,7 @@ export default function App() {
         keyExtractor={(item) => item.id}
         />
       </View>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Quieres eliminar este elemento?</Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={styles.textStyle}>NO</Text>
-              </Pressable>
-              <Pressable
-                style={[styles.button, styles.buttonDelete]}
-                onPress={() => deleteItem()}>
-                <Text style={styles.textStyle}>SI, ELIMINAR</Text>
-              </Pressable>
-          </View>
-        </View>
-      </Modal>
+      <Modal isVisible={modalVisible} notVisible={setModalVisible} actionDeleteItem={deleteItem}/>
     </View>
   );
 }
@@ -109,52 +86,4 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
 
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22
-  },
-
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonClose: {
-    backgroundColor: "royalblue",
-    marginBottom: 15,
-  },
-  buttonDelete: {
-    backgroundColor: "lightslategrey",
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-    fontSize: 15,
-    padding: 3,
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center"
-  },
 });
