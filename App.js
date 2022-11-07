@@ -1,5 +1,6 @@
 import { Button, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
+import AddItem from './componets/AddItem';
 import Modal from './componets/Modal';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
@@ -41,11 +42,10 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Lista del Super 🛒</Text>
-      <View style={styles.itemContainer}>
-        <TextInput value={textItem} placeholder='Agregar item a la lista' style={styles.inputItem} onChangeText={onHandleChangeItem}/>
-        <Button title='Agregar' color= 'cornflowerblue' onPress={addItem}/>
-      </View>
+        <View>
+            <Text style={styles.titulo}>Lista del Super 🛒</Text>
+            <AddItem onChange={onHandleChangeItem} onAddItem={addItem} value={textItem}/>
+        </View>
       <View>
         <FlatList 
         data={itemList}
@@ -64,26 +64,14 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 150,
   },
+  itemstyle:{
+    marginLeft: 20,
+    paddingTop: 10,
+  },
   titulo:{
     fontSize: 32,
     marginLeft: 15,
     paddingBottom: 20,
     color: "royalblue",
   },
-  itemContainer:{
-    flexDirection: 'row', 
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  inputItem:{
-    borderBottomColor: 'black', 
-    borderBottomWidth: 1, 
-    width: 200, 
-    marginRight: 20,
-  },
-  itemstyle:{
-    marginLeft: 20,
-    paddingTop: 10,
-  },
-
 });
