@@ -1,6 +1,7 @@
-import { Button, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 import AddItem from './componets/AddItem';
+import IndexFlatList from './componets/Lista';
 import Modal from './componets/Modal';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
@@ -47,11 +48,7 @@ export default function App() {
             <AddItem onChange={onHandleChangeItem} onAddItem={addItem} value={textItem}/>
         </View>
       <View>
-        <FlatList 
-        data={itemList}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        />
+        <IndexFlatList itemList={itemList} renderItem={renderItem}/>
       </View>
       <Modal isVisible={modalVisible} notVisible={setModalVisible} actionDeleteItem={deleteItem}/>
     </View>
@@ -64,14 +61,14 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 150,
   },
-  itemstyle:{
-    marginLeft: 20,
-    paddingTop: 10,
-  },
   titulo:{
     fontSize: 32,
     marginLeft: 15,
     paddingBottom: 20,
     color: "royalblue",
   },
+  itemstyle:{
+    marginLeft: 20,
+    paddingTop: 20,
+},
 });
